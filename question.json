@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "title": "あなたは今学校に不満がありますか？",
+    "detailsFile": "dissatisfaction.json"
+  },
+  {
+    "id": 2,
+    "title": "あなたはセルフマネジメント力があると思いますか？",
+    "detailsFile": "self-management.json"
+  },
+  {
+    "id": 3,
+    "title": "通信制についてどの程度調べましたか？",
+    "detailsFile": "search.json"
+  },
+  {
+    "id": 4,
+    "title": "通信制のデメリットもちゃんと理解していますか？",
+    "detailsFile": "demerit.json"
+  },
+  {
+    "id": 5,
+    "title": "あなたの直感はどちらですか？",
+    "detailsFile": "intuition.json"
+  }
+]
