@@ -1,0 +1,33 @@
+{
+  "name": "correspondence_high_school",
+  "version": "1.0.0",
+  "description": "You can choice correspondence_high_school that you want to listen to.",
+  "main": "chs.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "fix": "prettier --write . && eslint --fix .",
+    "lint": "prettier --check . && eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yocchan-git/correspondence_high_school.git"
+  },
+  "author": "yocchan-git",
+  "license": "MIT",
+  "bin": {
+    "correspondence_high_school": "./chs.js"
+  },
+  "bugs": {
+    "url": "https://github.com/yocchan-git/correspondence_high_school/issues"
+  },
+  "homepage": "https://github.com/yocchan-git/correspondence_high_school#readme",
+  "devDependencies": {
+    "eslint": "^8.56.0",
+    "prettier": "^3.2.4"
+  },
+  "dependencies": {
+    "enquirer": "^2.4.1",
+    "fs": "^0.0.1-security"
+  },
+  "type": "module"
+}
