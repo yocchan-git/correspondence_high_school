@@ -70,13 +70,13 @@ async function calculatePointForQuestion(question, __dirname) {
 
 function createComment(totalPoints) {
   if (totalPoints >= 75) {
-    return  "通信制高校に向いてるかも！前向きに検討してみてね";
+    return "通信制高校に向いてるかも！前向きに検討してみてね";
   } else if (totalPoints < 75 && totalPoints >= 50) {
-    return  "通信制高校にちょい向いてる。資料請求してみたらいいかも";
+    return "通信制高校にちょい向いてる。資料請求してみたらいいかも";
   } else if (totalPoints < 50 && totalPoints >= 25) {
-    return  "通信制高校にちょい向いてなさそう。今の環境で満足できるまで頑張ってみるといいかも";
+    return "通信制高校にちょい向いてなさそう。今の環境で満足できるまで頑張ってみるといいかも";
   } else {
-    return  "通信制高校には向いてなさそう。今のまま楽しんで！";
+    return "通信制高校には向いてなさそう。今のまま楽しんで！";
   }
 }
 
