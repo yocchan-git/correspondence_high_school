@@ -8,27 +8,24 @@ import path from "path";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-selectStories(__dirname);
-
-async function selectStories(__dirname) {
+async function main(__dirname) {
+  const millisecond = 1500;
   console.log(
     "このアプリでは,5つの質問であなたの通信制高校への適応度を測ります\n",
   );
-  await timeOut(1500);
+  await timeOut(millisecond);
   console.log("ただ、最終的な意思決定はご自身で行なってくださいね！\n");
-  await timeOut(1500);
+  await timeOut(millisecond);
   console.log("それでは、スタート\n");
-  await timeOut(1500);
+  await timeOut(millisecond);
 
   const questions = JSON.parse(
-    await fsPromises.readFile(`${__dirname}/question.json`),
+    await fsPromises.readFile(`${__dirname}/questions/question.json`),
   );
-  const totalPoints = await appropriateQuestion(questions, __dirname);
+  const totalPoints = await calculateTotalPoints(questions, __dirname);
+  const comment = createComment(totalPoints);
 
-  const fitnessMessage = `あなたの適応度は${totalPoints}%です`;
-  const comment = await createComment(totalPoints);
-
-  console.log(fitnessMessage);
+  console.log(`あなたの適応度は${totalPoints}%です`);
   console.log(comment);
 }
 
@@ -38,19 +35,19 @@ async function timeOut(ms) {
   });
 }
 
-async function appropriateQuestion(questions, __dirname) {
+async function calculateTotalPoints(questions, __dirname) {
   let percentPoints = 0;
 
   for (let i = 0; i <= 4; i++) {
-    percentPoints += await questionDetails(questions[i], __dirname);
+    percentPoints += await calculatePointForQuestion(questions[i], __dirname);
   }
 
   return percentPoints;
 }
 
-async function questionDetails(question, __dirname) {
+async function calculatePointForQuestion(question, __dirname) {
   const choiceAnswers = JSON.parse(
-    await fsPromises.readFile(`${__dirname}/${question.detailsFile}`),
+    await fsPromises.readFile(`${__dirname}/questions/${question.detailsFile}`),
   );
 
   const query = {
@@ -71,18 +68,16 @@ async function questionDetails(question, __dirname) {
   return answer.point;
 }
 
-async function createComment(totalPoints) {
-  return new Promise((resolve) => {
-    if (totalPoints >= 75) {
-      resolve("通信制高校に向いてるかも！前向きに検討してみてね");
-    } else if (totalPoints < 75 && totalPoints >= 50) {
-      resolve("通信制高校にちょい向いてる。資料請求してみたらいいかも");
-    } else if (totalPoints < 50 && totalPoints >= 25) {
-      resolve(
-        "通信制高校にちょい向いてなさそう。今の環境で満足できるまで頑張ってみるといいかも",
-      );
-    } else {
-      resolve("通信制高校には向いてなさそう。今のまま楽しんで！");
-    }
-  });
+function createComment(totalPoints) {
+  if (totalPoints >= 75) {
+    return  "通信制高校に向いてるかも！前向きに検討してみてね";
+  } else if (totalPoints < 75 && totalPoints >= 50) {
+    return  "通信制高校にちょい向いてる。資料請求してみたらいいかも";
+  } else if (totalPoints < 50 && totalPoints >= 25) {
+    return  "通信制高校にちょい向いてなさそう。今の環境で満足できるまで頑張ってみるといいかも";
+  } else {
+    return  "通信制高校には向いてなさそう。今のまま楽しんで！";
+  }
 }
+
+main(__dirname);
